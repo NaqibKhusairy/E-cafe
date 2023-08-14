@@ -1,6 +1,8 @@
 import mysql.connector
 import bcrypt
+import random
 import datetime
+import string
 
 dash = "-" * 70
 
@@ -14,6 +16,23 @@ table2 = [
 	["2", "View Menu"],
 	["3", "Back"]
 ]
+
+table3 = [
+	["1","Add Staff account"], #belum
+	["2","Delete Staff account"], #belum
+	["3","View Order"], #belum
+	["4","Customer Payment"], #belum
+	["5","Change Password"], #belum
+	["6","Log Out"], #belum
+]
+
+table4 = [
+	["1","View Order"], #belum
+	["2","Customer Payment"], #belum
+	["3","Change Password"], #belum
+	["4","Log Out"], #belum
+]
+
 Makanan = [
 	[" Code", "Makanan", "Price"],
 	["x", "  Telur Rabus", "0.50"],
@@ -79,6 +98,7 @@ Minuman = [
 	["x", "  Jus Epal", "  -" , "3.70"],
 	["x", "  Cendol Spesial", "  -" , "5.00"]
 ]
+
 orderlist=[]
 
 def database():
@@ -86,7 +106,7 @@ def database():
 		host="localhost",
 		user="root",
 		password="",
-		database="cafe") #done
+		database="cafe")
 
 def createdatabase():
 	try:
@@ -108,8 +128,10 @@ def createdatabase():
 
 		mydbse.execute("CREATE TABLE IF NOT EXISTS orders "
 			"(username VARCHAR(200), "
+			"ordernum VARCHAR(200),"
 			"detail LONGTEXT, "
-			"total VARCHAR(200)) ")
+			"total VARCHAR(200), "
+			"payment VARCHAR(200)) ")
 
 		mydbse.execute("SELECT * FROM staff WHERE username=%s", ("admin",))
 		sameinpt = mydbse.fetchone()
@@ -124,11 +146,11 @@ def createdatabase():
 			projectdatabase.commit()
 
 	except mysql.connector.Error as err:
-		print("Error: {}".format(err)) #done
+		print("Error: {}".format(err))
 
 def showmenu():
 	menu()
-	order() #done
+	order()
 
 def find_item_details(item_code):
 	for row in Makanan[1:]:
@@ -154,7 +176,7 @@ def find_item_details(item_code):
 						item = row[1]+ " Ais"
 						price = float(row[3])
 
-	return item, price #done
+	return item, price
 
 def order():
 	orderlist = []
@@ -190,6 +212,8 @@ def order():
 				price = orderlist[x]['price']
 				print(x + 1, cusorder," , RM {:.2f}".format(price))
 			print("Total Price : RM {:.2f}".format(totalprice))
+			characters = string.ascii_lowercase + string.digits
+			ordernumber = ''.join(random.choice(characters) for _ in range(12))
 			
 			try:
 				projectdatabase = database()
@@ -199,9 +223,9 @@ def order():
 				totalprice = "RM {:.2f}".format(totalprice)
 
 				mydbse.execute("INSERT INTO orders"
-					"(username, detail, total)"
-					"VALUES(%s, %s, %s)",
-					(usename, odercus, totalprice))
+					"(username, ordernum, detail, total, payment)"
+					"VALUES(%s, %s, %s, %s, %s)",
+					(usename, ordernumber, odercus, totalprice, "unpaid"))
 
 				projectdatabase.commit()
 
@@ -210,10 +234,11 @@ def order():
 
 			print()
 			print(dash)
-			print("             Receipt             ")
+			print("{:<25} {:<45}".format("","Your Order"))
 			print(dash)
-			print("Customer: ", usename)
-			print("Date: ", datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+			print("Customer     : ", usename)
+			print("Date         : ", datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+			print("Order Number : ",ordernumber)
 			print(dash)
 			print("{:<6} {:<19}{:<31} {:<14}".format("No.", "","  Item", "Price"))
 			print(dash)
@@ -226,7 +251,7 @@ def order():
 			print("Total Price: ", totalprice)
 			print(dash)
 			print("Thank you for your order!")
-			main() #done
+			main()
 
 def menu() :
 	x = 0
@@ -251,7 +276,7 @@ def menu() :
 		x += 1
 		row[0] = "D" + str(x)
 		print("|{:<6}|{:<36}|  RM {:<4}  |  RM {:<5}  |".format(row[0], row[1], row[2], row[3]))
-	print(dash +" \n") #done
+	print(dash +" \n")
 
 def ordermenu():
 	askuser = input("You want To Order ? [Y or Any Key To Exit] : ")
@@ -259,7 +284,7 @@ def ordermenu():
 	if askuser == "Y" :
 		order()
 	else:
-		user() #done
+		user()
 
 def user():
 	print(dash + "\n" +
@@ -286,10 +311,187 @@ def user():
 	except :
 		print(dash + "\n" +
 			"              Invalid Choice !!!              ")
-		main()#done
+		main()
 
-def admin():#belum siap
-	print("Admin Belum Siap")
+def addstaff(username):
+	print(dash)
+	print("{:<14}{:<61}".format("","Add New Staff "))
+	print(dash)
+	try:
+		username2 = input("Please enter Username: ")
+		projectdatabase = database()
+		mydbse = projectdatabase.cursor()
+		mydbse.execute("SELECT * FROM staff WHERE username = %s",(username2,))
+		sameid = mydbse.fetchone()
+
+		if sameid :
+			print("The Account is Already Registered.")
+			askuser = input("Do you want To Register Other Account ? [ Y to continue or any key to back] : ")
+			askuser = askuser.upper()
+			if askuser == "Y" :
+				addstaff(username)
+			else :
+				staf(username)
+		else :
+			passwrd1 = input("Please enter Password: ")
+			passwrd = bcrypt.hashpw(passwrd1.encode('utf-8'), bcrypt.gensalt())
+			mydbse.execute("INSERT INTO staff"
+				"(username, password)"
+				"VALUES(%s, %s )",
+				(username2, passwrd))
+			projectdatabase.commit()
+
+			passwrd1 = "*" * len(passwrd1)
+
+			print("Registeration Complete ....")
+			print(dash)
+			print("Username : "+username2+
+				"\nPassword : "+passwrd1)
+			staf(username)
+
+	except mysql.connector.Error as err:
+		print("Failed to Insert data: {}".format(err))
+		staf(username)
+
+def deletestaff(username):
+	print(dash)
+	print("{:<14}{:<61}".format("","Delete Staff "))
+	print(dash)
+	try:
+		username2 = input("Please enter Username: ")
+		projectdatabase = database()
+		mydbse = projectdatabase.cursor()
+		mydbse.execute("SELECT * FROM staff WHERE username = %s",(username2,))
+		staffrecord = mydbse.fetchone()
+
+		if staffrecord :
+			print(dash)
+			print("Deleting " + username2 + " account...")
+			print(dash)
+			askuser = input(f"Do you want to Delete the {username2} account? [Y or N]: ").upper()
+			if askuser == "Y" :
+				mydbse.execute("DELETE FROM staff WHERE username = %s",(username2,))
+				projectdatabase.commit()
+				print("Deleted " + username2 + " account successfully")
+				staf(username)
+			elif askuser == "N" :
+				print("Deleting Canceled")
+				staf(username)
+			else :
+				print("You Need to enter either Y or N !!!!")
+				staf(username)
+		else :
+			print("User not Found")
+			staf(username)
+
+	except mysql.connector.Error as err:
+		print("Failed to Deleted User:", str(e))
+		staf(username)
+
+def vieworder(username):
+	print("View Order belum siap")
+	staf(username)
+
+def cuspay(username):
+	print("Customer Payment belum siap")
+	staf(username)
+
+def changepass(username):
+	print("Change Password belum siap")
+	staf(username)
+
+def staf(username):
+	print(dash)
+	print("{:<14}{:<61}".format("","Welcome Back " +username))
+	print(dash)
+	if username == "admin" :
+		for row in table3 :
+			for col in row :
+				print(col, end = "\t")
+			print()
+		print(dash)
+		try :
+			askuser = int(input("Please Choose [1 or 2 or 3 or 4 or 5 or 6] : "))
+			if askuser == 1 :
+				addstaff(username)
+			elif askuser == 2 :
+				deletestaff(username)
+			elif askuser == 3 :
+				vieworder(username)
+			elif askuser == 4 :
+				cuspay(username)
+			elif askuser == 5 :
+				changepass(username)
+			elif askuser == 6 :
+				main()
+			else :
+				print(dash + "\n" +
+				  "              Invalid Choice !!!              ")
+				staf(username)
+		except :
+			print(dash + "\n" +
+				  "              Invalid Choice !!!              ")
+			staf(username)
+	else:
+		for row in table4 :
+			for col in row :
+				print(col, end = "\t")
+			print()
+		print(dash)
+		try :
+			askuser = int(input("Please Choose [1 or 2 or 3 or 4] : "))
+			if askuser == 1 :
+				vieworder(username)
+			elif askuser == 2 :
+				cuspay(username)
+			elif askuser == 3 :
+				changepass(username)
+			elif askuser == 4 :
+				main()
+			else :
+				print(dash + "\n" +
+				  "              Invalid Choice !!!              ")
+				staf(username)
+		except :
+			print(dash + "\n" +
+				  "              Invalid Choice !!!              ")
+			staf(username)
+
+def admin(count):
+	print(dash)
+	print("{:<23}{:<47}".format("","Staff Log In"))
+	print(dash)
+	username = input("Please enter your Username: ")
+	try:
+		projectdatabase = database()
+		mydbse = projectdatabase.cursor()
+		mydbse.execute("SELECT * FROM staff WHERE username = %s",(username,))
+		userdata = mydbse.fetchone()
+
+		if userdata :
+			passwrd = input("Please enter your Password: ")
+			if bcrypt.checkpw(passwrd.encode('utf-8'), userdata[1].encode('utf-8')):
+				print("Welcome back," + username + ".")
+				staf(username)
+			else:
+				if count == 1 :
+					print("Your password is wrong. Sorry You have reached the Maximum Limit which is 3 times. Please Try Again")
+					admin(3)
+				else:
+					count -=1
+					print("Your password is wrong. Please try again. You only have " + str(count) + " chances left")
+					admin(count)
+		else:
+			print("Your staff account is not in the database, are you serious you are staff?")
+			askuser = input("Do you want To Login Y for yes or any key to quit ? [ Y or any key ] : ")
+			askuser = askuser.upper()
+			if askuser == "Y":
+				admin(count)
+			else:
+				main()
+
+	except mysql.connector.Error as err:
+		print("Failed to log in: {}".format(err))
 
 def main() :
 	print(dash + "\n" +
@@ -305,7 +507,8 @@ def main() :
 		if askuser == 1 :
 			user()
 		elif askuser == 2 :
-			admin()
+			count=3
+			admin(count)
 		else :
 			print(dash + "\n" +
 			  "              Invalid Choice !!!              ")
@@ -313,7 +516,7 @@ def main() :
 	except :
 		print(dash + "\n" +
 			  "              Invalid Choice !!!              ")
-		main()#done
+		main()
 
 while True :
 	createdatabase()
