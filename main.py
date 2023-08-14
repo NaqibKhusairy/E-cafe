@@ -8,7 +8,7 @@ dash = "-" * 70
 
 table1 = [
 	["1", "Customer"],
-	["2", "Staff"] #belum
+	["2", "Staff"]
 ]
 
 table2 = [
@@ -18,17 +18,17 @@ table2 = [
 ]
 
 table3 = [
-	["1","Add Staff account"], #belum
-	["2","Delete Staff account"], #belum
-	["3","View Order"], #belum
-	["4","Customer Payment"], #belum
+	["1","Add Staff account"],
+	["2","Delete Staff account"],
+	["3","View Order"],
+	["4","Customer Payment"],
 	["5","Change Password"], #belum
 	["6","Log Out"], #belum
 ]
 
 table4 = [
-	["1","View Order"], #belum
-	["2","Customer Payment"], #belum
+	["1","View Order"],
+	["2","Customer Payment"],
 	["3","Change Password"], #belum
 	["4","Log Out"], #belum
 ]
@@ -421,8 +421,73 @@ def vieworder(username):
 		staf(username)
 
 def cuspay(username):
-	print("Customer Payment belum siap")
-	staf(username)
+	print(dash)
+	print("{:<14}{:<61}".format("","Customer Payment"))
+	print(dash)
+	try:
+		projectdatabase = database()
+		mydbse = projectdatabase.cursor()
+		ordernum = input("Insert Order Number : ").lower()
+
+		mydbse.execute("SELECT * FROM orders WHERE ordernum = %s", (ordernum,))
+		ordercus = mydbse.fetchone()
+
+		if ordercus and ordercus[4].lower() == 'unpaid' :
+			mydbse.execute("SELECT * FROM orders WHERE ordernum = %s", (ordernum,))
+			listorder = mydbse.fetchall()
+
+			if listorder :
+				for senaraiorder in listorder :
+					username2 = senaraiorder[0]
+					ordernum = senaraiorder[1]
+					detail = senaraiorder[2]
+					total = senaraiorder[3]
+
+					print("{:<14}: {:<61}".format("Username",username2))
+					print("{:<14}: {:<61}".format("Order Number",ordernum))
+					print("{:<14}: {:<61}".format("Order",""))
+					print(detail)
+					print("{:<14}: {:<61}".format("Total Price",total))
+					print(dash)
+					askcasher = input(f"Do {username2} want to Pay? [Y or N]: ").upper()
+
+					if askcasher == "Y" :
+						mydbse.execute("UPDATE orders SET payment = %s WHERE username = %s",("paid",username2))
+						projectdatabase.commit()
+
+						print()
+						print(dash)
+						print("{:<25} {:<45}".format("","Payment Detail"))
+						print(dash)
+						print("Customer     : ", username2)
+						print("Date         : ", datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+						print("Order Number : ", ordernum)
+						print(dash)
+						print("Order : ")
+						print(detail)
+						print(dash)
+						print("Total Price: ", total)
+						print(dash)
+						print("Paid")
+						print(dash)
+						print("Thank you "+username2+" For Coming..")
+						staf(username)
+					elif askuser == "N" :
+						staf(username)
+					else :
+						print("You Need to enter either Y or N !!!!")
+						staf(username)
+
+			else:
+				print("No Order")
+				staf(username)
+		else :
+			print("Your Have Paid")
+			staf(username)
+
+	except mysql.connector.Error as err:
+		print("Failed to Find Order :{}".format(err))
+		staf(username)
 
 def changepass(username):
 	print("Change Password belum siap")
