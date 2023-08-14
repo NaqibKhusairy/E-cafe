@@ -22,15 +22,15 @@ table3 = [
 	["2","Delete Staff account"],
 	["3","View Order"],
 	["4","Customer Payment"],
-	["5","Change Password"], #belum
-	["6","Log Out"], #belum
+	["5","Change Password"],
+	["6","Log Out"],
 ]
 
 table4 = [
 	["1","View Order"],
 	["2","Customer Payment"],
-	["3","Change Password"], #belum
-	["4","Log Out"], #belum
+	["3","Change Password"],
+	["4","Log Out"],
 ]
 
 Makanan = [
@@ -490,8 +490,34 @@ def cuspay(username):
 		staf(username)
 
 def changepass(username):
-	print("Change Password belum siap")
-	staf(username)
+	print(dash)
+	print("{:<25}{:<50}".format("",username+" Change Password"))
+	print(dash)
+	try:
+		projectdatabase = database()
+		mydbse = projectdatabase.cursor()
+		passwrd = input("Please enter your New Password: ")
+		cpasswrd = input("Please confirm your New Password: ")
+
+		if passwrd == cpasswrd :
+			passwrd = bcrypt.hashpw(passwrd.encode('utf-8'), bcrypt.gensalt())
+			mydbse.execute("UPDATE staff SET password=%s WHERE username=%s",(passwrd, username))
+			projectdatabase.commit()
+
+			cpasswrd = "*" * len(cpasswrd)
+
+			print("Change Password Complete ....")
+			print(dash)
+			print("Username : "+username+
+				"\nPassword : "+cpasswrd)
+			staf(username)
+		else :
+			print("Please Make Sure Your Password and confirm passwrd is same. please register again")
+			changepass(username)
+
+	except mysql.connector.Error as err:
+		print("Failed to update data: {}".format(err))
+		staf(username)
 
 def staf(username):
 	print(dash)
