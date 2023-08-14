@@ -35,68 +35,68 @@ table4 = [
 
 Makanan = [
 	[" Code", "Makanan", "Price"],
-	["x", "  Telur Rabus", "0.50"],
-	["x", "  Telur Mata", "1.00"],
-	["x", "  Telur Dadar", "1.50"],
-	["x", "  Nasi Putih", "1.50"],
-	["x", "  Nasi Lemak", "2.00"],
-	["x", "  Ayam Goreng", "3.00"],
-	["x", "  Nasi Bujang", "4.00"],
-	["x", "  Nasi Goreng Biasa", "4.50"],
-	["x", "  Nasi Ayam", "5.00"],
-	["x", "  Nasi Goreng Tomyam", "5.00"],
-	["x", "  Nasi Goreng Kampung", "5.00"],
-	["x", "  Nasi Goreng Cina", "5.00"],
-	["x", "  Nasi Goreng Bujang", "5.00"],
-	["x", "  Nasi Goreng Pataya", "6.00"],
-	["x", "  Nasi Goreng Ayam", "7.00"],
-	["x", "  Nasi Goreng Ayam Merah", "7.00"],
-	["x", "  Nasi Goreng Daging Merah", "7.00"],
-	["x", "  Nasi Goreng USA", "8.00"],
-	["x", "  Mee Goreng", "5.00"],
-	["x", "  Maggi Goreng", "5.00"],
-	["x", "  Bihun Goreng", "5.00"],
-	["x", "  Kuew Teow Goreng", "5.00"],
-	["x", "  Maggi Kari", "5.50"],
-	["x", "  Maggi Sup", "5.50"],
-	["x", "  Maggi Tomyam", "5.50"],
-	["x", "  Sayur Campur", "8.00"],
-	["x", "  Kailan Ikan Masin", "8.00"],
-	["x", "  Kangkung Goreng Belacan", "8.00"],
-	["x", "  Ayam Masak Merah", "8.00"],
-	["x", "  Daging Masak Merah", "8.00"],
-	["x", "  Tomyam Ayam", "8.00"],
-	["x", "  Tomyam Daging", "8.00"],
-	["x", "  Tomyam Seafood", "9.00"],
-	["x", "  Tomyam Campur", "9.40"],
-	["x", "  Char Kuew Teow Udang", "8.00"],
-	["x", "  Char Kuew Teow Kerang", "8.00"],
-	["x", "  Char Kuew Teow Udang + Kerang", "9.50"],
-	["x", "  Char Kuew Teow Special", "10.00"]
+	["x", "Telur Rabus", "0.50"],
+	["x", "Telur Mata", "1.00"],
+	["x", "Telur Dadar", "1.50"],
+	["x", "Nasi Putih", "1.50"],
+	["x", "Nasi Lemak", "2.00"],
+	["x", "Ayam Goreng", "3.00"],
+	["x", "Nasi Bujang", "4.00"],
+	["x", "Nasi Goreng Biasa", "4.50"],
+	["x", "Nasi Ayam", "5.00"],
+	["x", "Nasi Goreng Tomyam", "5.00"],
+	["x", "Nasi Goreng Kampung", "5.00"],
+	["x", "Nasi Goreng Cina", "5.00"],
+	["x", "Nasi Goreng Bujang", "5.00"],
+	["x", "Nasi Goreng Pataya", "6.00"],
+	["x", "Nasi Goreng Ayam", "7.00"],
+	["x", "Nasi Goreng Ayam Merah", "7.00"],
+	["x", "Nasi Goreng Daging Merah", "7.00"],
+	["x", "Nasi Goreng USA", "8.00"],
+	["x", "Mee Goreng", "5.00"],
+	["x", "Maggi Goreng", "5.00"],
+	["x", "Bihun Goreng", "5.00"],
+	["x", "Kuew Teow Goreng", "5.00"],
+	["x", "Maggi Kari", "5.50"],
+	["x", "Maggi Sup", "5.50"],
+	["x", "Maggi Tomyam", "5.50"],
+	["x", "Sayur Campur", "8.00"],
+	["x", "Kailan Ikan Masin", "8.00"],
+	["x", "Kangkung Goreng Belacan", "8.00"],
+	["x", "Ayam Masak Merah", "8.00"],
+	["x", "Daging Masak Merah", "8.00"],
+	["x", "Tomyam Ayam", "8.00"],
+	["x", "Tomyam Daging", "8.00"],
+	["x", "Tomyam Seafood", "9.00"],
+	["x", "Tomyam Campur", "9.40"],
+	["x", "Char Kuew Teow Udang", "8.00"],
+	["x", "Char Kuew Teow Kerang", "8.00"],
+	["x", "Char Kuew Teow Udang + Kerang", "9.50"],
+	["x", "Char Kuew Teow Special", "10.00"]
 ]
 
 Minuman = [
 	[" Code", "Minuman", "Panas"  , "Ais"],
-	["x", "  Air Kosong", "0.20" , "0.50"],
-	["x", "  Teh Panas", "1.00" , "1.20"],
-	["x", "  Kopi Panas", "1.00" , "1.20"],
-	["x", "  Teh Tarik", "1.50" , "1.70"],
-	["x", "  Kopi O", "1.50" , "1.70"],
-	["x", "  Milo Panas", "1.50" , "1.70"],
-	["x", "  Teh O", "1.50" , "1.70"],
-	["x", "  Kopi ", "1.50" , "1.70"],
-	["x", "  Sirap Bandung", "2.50" , "2.70"],
-	["x", "  Bandung Soda", "  -" , "3.00"],
-	["x", "  Ais Kepal", "  -" , "3.00"],
-	["x", "  ABC", "  -" , "3.00"],
-	["x", "  Cendol Biasa", "  -" , "3.50"],
-	["x", "  Cendol Jagung", "  -" , "3.50"],
-	["x", "  Cendol Pulut", "  -" , "4.00"],
-	["x", "  Jus Oren", "  -" , "3.40"],
-	["x", "  Jus Tembikai", "  -" , "3.50"],
-	["x", "  Jus Mangga", "  -" , "3.60"],
-	["x", "  Jus Epal", "  -" , "3.70"],
-	["x", "  Cendol Spesial", "  -" , "5.00"]
+	["x", "Air Kosong", "0.20" , "0.50"],
+	["x", "Teh Panas", "1.00" , "1.20"],
+	["x", "Kopi Panas", "1.00" , "1.20"],
+	["x", "Teh Tarik", "1.50" , "1.70"],
+	["x", "Kopi O", "1.50" , "1.70"],
+	["x", "Milo Panas", "1.50" , "1.70"],
+	["x", "Teh O", "1.50" , "1.70"],
+	["x", "Kopi ", "1.50" , "1.70"],
+	["x", "Sirap Bandung", "2.50" , "2.70"],
+	["x", "Bandung Soda", "  -" , "3.00"],
+	["x", "Ais Kepal", "  -" , "3.00"],
+	["x", "ABC", "  -" , "3.00"],
+	["x", "Cendol Biasa", "  -" , "3.50"],
+	["x", "Cendol Jagung", "  -" , "3.50"],
+	["x", "Cendol Pulut", "  -" , "4.00"],
+	["x", "Jus Oren", "  -" , "3.40"],
+	["x", "Jus Tembikai", "  -" , "3.50"],
+	["x", "Jus Mangga", "  -" , "3.60"],
+	["x", "Jus Epal", "  -" , "3.70"],
+	["x", "Cendol Spesial", "  -" , "5.00"]
 ]
 
 orderlist=[]
@@ -264,7 +264,7 @@ def menu() :
 	for row in Makanan[1:] :
 		x += 1
 		row[0] = "F" + str(x)
-		print("|{:<6}|{:<48}|  RM {:<5}  |".format(row[0], row[1], row[2]))
+		print("|{:<6}|  {:<48}|  RM {:<5}  |".format(row[0], row[1], row[2]))
 	print(dash +" \n")
 
 	x = 0
@@ -275,7 +275,7 @@ def menu() :
 	for row in Minuman[1:] :
 		x += 1
 		row[0] = "D" + str(x)
-		print("|{:<6}|{:<36}|  RM {:<4}  |  RM {:<5}  |".format(row[0], row[1], row[2], row[3]))
+		print("|{:<6}|  {:<36}|  RM {:<4}  |  RM {:<5}  |".format(row[0], row[1], row[2], row[3]))
 	print(dash +" \n")
 
 def ordermenu():
@@ -370,7 +370,7 @@ def deletestaff(username):
 			print(dash)
 			askuser = input(f"Do you want to Delete the {username2} account? [Y or N]: ").upper()
 			if askuser == "Y" :
-				mydbse.execute("DELETE FROM staff WHERE username = %s",(username2,))
+				mydbse.execute("DELETE FROM staff WHERE username = %s",(username2))
 				projectdatabase.commit()
 				print("Deleted " + username2 + " account successfully")
 				staf(username)
@@ -389,8 +389,36 @@ def deletestaff(username):
 		staf(username)
 
 def vieworder(username):
-	print("View Order belum siap")
-	staf(username)
+	print(dash)
+	print("{:<14}{:<61}".format("","Customer Order"))
+	print(dash)
+	try:
+		projectdatabase = database()
+		mydbse = projectdatabase.cursor()
+		mydbse.execute("SELECT * FROM orders WHERE payment = %s", ("unpaid",))
+		listorder = mydbse.fetchall()
+
+		if listorder :
+			for senaraiorder  in listorder :
+				username2 = senaraiorder[0]
+				ordernum = senaraiorder[1]
+				detail = senaraiorder[2]
+				total = senaraiorder[3]
+
+				print("{:<14}: {:<61}".format("Username",username2))
+				print("{:<14}: {:<61}".format("Order Number",ordernum))
+				print("{:<14}: {:<61}".format("Order",""))
+				print(detail)
+				print("{:<14}: {:<61}".format("Total Price",total))
+				print(dash)
+			staf(username)
+		else :
+			print("No Order")
+			staf(username)
+
+	except mysql.connector.Error as err:
+		print("Failed to Find Order :{}".format(err))
+		staf(username)
 
 def cuspay(username):
 	print("Customer Payment belum siap")
@@ -404,7 +432,7 @@ def staf(username):
 	print(dash)
 	print("{:<14}{:<61}".format("","Welcome Back " +username))
 	print(dash)
-	if username == "admin" :
+	if username.lower() == "admin" :
 		for row in table3 :
 			for col in row :
 				print(col, end = "\t")
