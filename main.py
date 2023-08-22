@@ -78,9 +78,9 @@ Makanan = [
 Minuman = [
 	[" Code", "Minuman", "Panas"  , "Ais"],
 	["x", "Air Kosong", "0.20" , "0.50"],
-	["x", "Teh Panas", "1.00" , "1.20"],
 	["x", "Kopi Panas", "1.00" , "1.20"],
-	["x", "Teh Tarik", "1.50" , "1.70"],
+	["x", "Teh Tarik", "1.50" , "  -"],
+	["x", "Teh Ais", "  -" , "1.70"],
 	["x", "Kopi O", "1.50" , "1.70"],
 	["x", "Milo Panas", "1.50" , "1.70"],
 	["x", "Teh O", "1.50" , "1.70"],
@@ -164,7 +164,9 @@ def find_item_details(item_code):
 				if row[2] == "  -" :
 					item = row[1]
 					price = float(row[3])
-
+				elif row[3] == "  -":
+					item = row[1]
+					price = float(row[2])
 				else:
 					askminuman = input("You Want Panas Or Ais ? ")
 					askminuman = askminuman.lower()
