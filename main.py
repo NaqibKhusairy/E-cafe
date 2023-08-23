@@ -190,17 +190,20 @@ def order():
 		orderuser = input("Plese Enter Your Order : ")
 		orderuser = orderuser.upper()
 		print(dash)
-		item_details, price = find_item_details(orderuser)
+		try:
+			item_details, price = find_item_details(orderuser)
 
-		if item_details:
-			print("Order:", item_details," , RM {:.2f}".format(price))
-			orderlist.append({
-				'orderuser' : item_details,
-				'price': price
-				})
-			totalprice += float(price)
-		else:
-			print("Invalid order")
+			if item_details:
+				print("Order:", item_details," , RM {:.2f}".format(price))
+				orderlist.append({
+					'orderuser' : item_details,
+					'price': price
+					})
+				totalprice += float(price)
+			else:
+				print("Invalid order")
+		except :
+			print("\nfood or beverage code not found. please refer to the menu to order according to the code provided.\n")
 
 		print(dash)
 		askuser = input("Do You Want to add more order ? [Y or Any Key To Confirm] : ")
